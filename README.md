@@ -1,6 +1,6 @@
 # sell-pract1.0-1
 
-> A Vue.js project
+> A Vue1.0.js project
 
 ## Build Setup
 
