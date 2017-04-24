@@ -6,6 +6,9 @@
 //使用dev分支推送
 
 
+> A Vue1.0.js project
+
+
 ## Build Setup
 
 ``` bash
