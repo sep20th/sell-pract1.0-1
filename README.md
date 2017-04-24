@@ -1,6 +1,12 @@
 # sell-pract1.0-1
 
+> A Vue.js project
+这是一个基于vue1.0的preject
+>本地idea分支//切换sep20th账户
+
+
 > A Vue1.0.js project
+
 
 ## Build Setup
 
