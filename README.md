@@ -1,6 +1,7 @@
 # sell-pract1.0-1
 
 > A Vue.js project
+这是一个基于vue1.0的preject
 
 ## Build Setup
 
