@@ -2,7 +2,7 @@
 
 > A Vue.js project
 这是一个基于vue1.0的preject
->本地idea分支
+>本地idea分支//切换sep20th账户
 
 
 ## Build Setup
