@@ -33,7 +33,8 @@
 		<div class="detail" v-show="detailShow">
 			<div class="detail-wrapper clearfix">
 				<div class="detail-main">
-					<h1 class="name">{{seller.name}}</h1>					
+					<h1 class="name">{{seller.name}}</h1>		
+					<star :size="48" :score="seller.score"></star>			
 				</div>
 			</div>
 			<div class="detail-close">
@@ -45,6 +46,7 @@
 </template>
 
 <script>
+	import star from "components/star/star";
 	export default{
 		data(){
 			return {
@@ -63,7 +65,12 @@
 			}
 		},
 		created(){
-			this.classMap = ['decrease','discount','special','invoice','guarantee']
+			this.classMap = ['decrease','discount','special','invoice','guarantee'];
+
+			//注册star组件
+			components:{
+				star
+			}
 		}
 	}
 </script>
