@@ -5,6 +5,9 @@
 >本地idea分支//切换sep20th账户
 
 
+> A Vue1.0.js project
+
+
 ## Build Setup
 
 ``` bash
