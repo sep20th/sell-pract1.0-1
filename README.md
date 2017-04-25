@@ -3,6 +3,7 @@
 > A Vue.js project
 这是一个基于vue1.0的preject
 >本地idea分支//切换sep20th账户
+//使用dev分支推送
 
 
 > A Vue1.0.js project
