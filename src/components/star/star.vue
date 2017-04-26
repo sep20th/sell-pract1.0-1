@@ -2,6 +2,8 @@
 	<div class="star" :class="starType">
 		<!-- star组件 -->
 		<!-- star组件 第二条注释 -->
+		<!-- star组件 第三条注释 -->
+		<!-- star组件 第四条注释 -->
 		<span v-for="itemClass in itemClasses" :class="itemClass" class="star-item" track-by="$index"></span>
 	</div>
 </template>
