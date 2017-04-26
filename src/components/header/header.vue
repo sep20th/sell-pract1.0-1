@@ -33,6 +33,7 @@
 		<div class="detail" v-show="detailShow">
 			<div class="detail-wrapper clearfix">
 				<div class="detail-main">
+
 					<h1 class="name">{{seller.name}}</h1>
 					<div class="star-wrapper">
 						<star :size="48" :score="seller.score"></star>			
@@ -42,6 +43,7 @@
 						<div class="text">优惠信息</div>
 						<div class="line"></div>
 					</div>		
+
 				</div>
 			</div>
 			<div class="detail-close">
@@ -73,10 +75,12 @@
 		},
 		created(){
 			this.classMap = ['decrease','discount','special','invoice','guarantee'];
+
 		},
 		//注册star组件
 		components:{
 			star
+
 		}
 	}
 </script>
