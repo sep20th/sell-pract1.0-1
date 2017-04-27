@@ -51,11 +51,6 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
 	@import "../../common/stylus/mixin.styl"
-
-	}
-</script>
-
-
 	.star
 		.star-item
 			display:inline-block

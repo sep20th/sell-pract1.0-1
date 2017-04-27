@@ -33,7 +33,6 @@ export default{
       let data = res.body
       if(data.errno === ERR_OK){
         this.seller = data.data
-          console.log(this.seller)
       }
     })
   },
