@@ -2,14 +2,15 @@
 	<div class="goods">
 		<div class="menu-wrapper">
 			<ul>
-				<li v-for="item in goods" class="menu-item" :class="{'current':currentIndex === $index}">
+				<li v-for="item in goods" class="menu-item" :class="{'current':currentIndex === $index}" @click='selectMenu($index,$event)'>
+				<!-- 当currentIndex与$index相等时候,会为li标签添加current名 -->
 					<span class="text border-1px">
 						<span v-show="item.type>0" class="icon" :class="classMap[item.type]"></span>{{item.name}}
 					</span>
 				</li>
 			</ul>
 		</div>
-		<div class="foods-wrapper" v-el:foods-wrapper :scoll='onScroll'>
+		<div class="foods-wrapper" v-el:foods-wrapper>
 			<ul>
 				<li v-for="item in goods" class = "food-list food-list-hook">
 					<h1 class="title">{{item.name}}</h1>
@@ -52,7 +53,7 @@
 			return{
 				goods:[],
 				listHeight:[],
-				scollY:0
+				scrollY:0
 
 			}
 		},//data end
@@ -64,9 +65,31 @@
 					this.goods = response.data;
 					this.$nextTick(()=>{
 						this._calculateHeight();
-					//监听滚动事件
-						window.addEventListener('scroll', this.onScroll)
-					})
+
+					/*
+						放在$nextTick中亦可;
+						//获取dom并 监听foods-wrapper滚动事件
+						let foodsWrapper = this.$els.foodsWrapper
+				 		let _this = this
+				 		var top = 0
+						foodsWrapper.onscroll=function(){ 
+							let top = 0
+				      top = this.scrollTop
+				      _this.scrollY = top
+				    }
+			    */ 
+					}); //$nextTick end
+
+					//获取dom并 监听foods-wrapper滚动事件
+					let foodsWrapper = this.$els.foodsWrapper
+			 		let _this = this
+			 		var top = 0
+					foodsWrapper.onscroll=function(){ 
+						let top = 0
+			      top = this.scrollTop
+			      _this.scrollY = top
+			    }
+			 		
 				}
 			});
 			this.classMap = ['decrease','discount','special','invoice','guarantee'];
@@ -98,13 +121,21 @@
 				for(let i=0;i<foodList.length;i++){
 					let item = foodList[i];
 					height += item.clientHeight;
+					//listHeight数组来存储每个food-list的scrollTop(每个foodlist的高度累加即可得到scrollTop)
 					this.listHeight.push(height)
 				}
 			},
 
-			onScroll(){
-				console.log('111')
-			},
+			//左右联动绑定
+			//获取被点击DOM的index,然后利用之前的listHeight中存储的scrollTop来完成定位
+			selectMenu(ids,event){
+				// console.log(event) //打酱油
+				console.log(this.listHeight)
+				let foodList = this.$els.foodsWrapper.getElementsByClassName('food-list-hook');
+				let top = this.listHeight[ids]
+				let foodsWrapper = this.$els.foodsWrapper
+				foodsWrapper.scrollTop = top
+			}
 		},//methods end
 
 	}
@@ -139,6 +170,7 @@
 					margin-top:-1px
 					background:#fff 
 					font-weight:700
+					z-index:10
 					.text
 						border-none()
 				.icon
