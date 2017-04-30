@@ -35,14 +35,19 @@
 					</ul>
 				</li>
 			</ul>
-
 		</div>
+		<!-- 引用shopcart组件 -->
+		<!-- 在初始化shopcart组件时,通过props传入属性 -->
+		<shopcart :delivery-price='seller.deliveryPrice' :min-price='seller.minPrice'></shopcart>
 	</div>
 </template>
 
 <script>
+//引用shopcart(购物车)组件
+import shopcart from 'components/shopcart/shopcart'  
 	const ERR_OK = 0;
 	export default{
+		// 外层组件传递给goods组件
 		props:{
 			seller:{
 				type:Object
@@ -83,7 +88,6 @@
 					//获取dom并 监听foods-wrapper滚动事件
 					let foodsWrapper = this.$els.foodsWrapper
 			 		let _this = this
-			 		var top = 0
 					foodsWrapper.onscroll=function(){ 
 						let top = 0
 			      top = this.scrollTop
@@ -96,6 +100,7 @@
 		},//created end
 
 		computed:{
+			//利用listheight计算左侧index值
 			currentIndex(){
 				for(let i=0;i<this.listHeight.length;i++){
 					let height1 = this.listHeight[i];
@@ -106,14 +111,13 @@
 				}
 				return 0;
 			},
-			
 
 		},//computed end
 
 		methods:{
 			_initScroll(){},
 
-			//计算food-list高度
+			//计算food-list高度,并保存到listheight中
 			_calculateHeight(){
 				let foodList = this.$els.foodsWrapper.getElementsByClassName('food-list-hook');
 				let height = 0;
@@ -121,13 +125,13 @@
 				for(let i=0;i<foodList.length;i++){
 					let item = foodList[i];
 					height += item.clientHeight;
-					//listHeight数组来存储每个food-list的scrollTop(每个foodlist的高度累加即可得到scrollTop)
+					//listHeight数组来存储每个food-list的scrollTop(每个foodlist的clientHeight累加即可得到scrollTop)
 					this.listHeight.push(height)
 				}
 			},
 
 			//左右联动绑定
-			//获取被点击DOM的index,然后利用之前的listHeight中存储的scrollTop来完成定位
+			//获取被点击DOM的index,然后利用之前listHeight中存储的scrollTop来完成定位
 			selectMenu(ids,event){
 				// console.log(event) //打酱油
 				console.log(this.listHeight)
@@ -137,6 +141,11 @@
 				foodsWrapper.scrollTop = top
 			}
 		},//methods end
+
+		//注册购物车组件
+		components:{
+			'shopcart':shopcart
+		}
 
 	}
 </script>
@@ -155,6 +164,7 @@
 			flex:0 0 80px
 			width:80px
 			background:#f3f5f7;
+			// 设置屏幕滚动,隐藏scrollbar
 			overflow-y: scroll;
 			-webkit-overflow-scrolling: touch
 			&::-webkit-scrollbar
@@ -199,6 +209,7 @@
 					font-size:12px
 		.foods-wrapper
 			flex:1
+			// 设置屏幕滚动,隐藏scrollbar
 			overflow-y: scroll
 			-webkit-overflow-scrolling: touch
 			&::-webkit-scrollbar
