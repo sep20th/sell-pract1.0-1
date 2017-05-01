@@ -15,7 +15,7 @@
 				<li v-for="item in goods" class = "food-list food-list-hook">
 					<h1 class="title">{{item.name}}</h1>
 					<ul>
-						<li class="food-item border-1px" v-for="food in item.foods" >
+						<li v-for="food in item.foods" class="food-item border-1px">
 							<div class="icon">
 								<img :src="food.icon" width="57" height="57">
 							</div>
@@ -30,21 +30,31 @@
 									<span class="now">￥{{food.price}}</span>
 									<span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</span>
 								</div>
+								<!-- 引入cartcontrol组件,便于绝对定位,添加包裹层 -->
+								<div class="cartcontrol-wrapper">
+									<!-- 在cartcontrol中food增加了count属性,会反过来影响父组件中的food -->
+									<cartcontrol :food='food'></cartcontrol>
+								</div>
 							</div>
 						</li>
 					</ul>
 				</li>
 			</ul>
 		</div>
-		<!-- 引用shopcart组件 -->
-		<!-- 在初始化shopcart组件时,通过props传入属性 -->
-		<shopcart :delivery-price='seller.deliveryPrice' :min-price='seller.minPrice'></shopcart>
+		<!-- 引用shopcart(购物车)组件 -->
+		<!-- 在初始化shopcart组件时,通过props传入属性值 -->
+		<!-- 
+			将选中的select-foods传入购物车组件 (需要用中划线)
+			这样cart组件和cartcontrol组件联动
+		-->
+		<shopcart :select-foods="selectFoods" :delivery-price='seller.deliveryPrice' :min-price='seller.minPrice'></shopcart>
 	</div>
 </template>
 
 <script>
 //引用shopcart(购物车)组件
-import shopcart from 'components/shopcart/shopcart'  
+import shopcart from 'components/shopcart/shopcart' 
+import cartcontrol from 'components/cartcontrol/cartcontrol' 
 	const ERR_OK = 0;
 	export default{
 		// 外层组件传递给goods组件
@@ -110,8 +120,21 @@ import shopcart from 'components/shopcart/shopcart'
 					}
 				}
 				return 0;
-			},
+			},//currentIndex
 
+			//被选中的food
+			selectFoods (){
+				let foods = [];
+				this.goods.forEach((good)=>{
+					good.foods.forEach((food)=>{
+						if(food.count){
+							foods.push(food);
+						}
+					});
+				});
+				return foods;
+			}
+	
 		},//computed end
 
 		methods:{
@@ -139,12 +162,14 @@ import shopcart from 'components/shopcart/shopcart'
 				let top = this.listHeight[ids]
 				let foodsWrapper = this.$els.foodsWrapper
 				foodsWrapper.scrollTop = top
-			}
+			},//selectMenu end
+
 		},//methods end
 
 		//注册购物车组件
 		components:{
-			'shopcart':shopcart
+			'shopcart':shopcart,
+			'cartcontrol':cartcontrol
 		}
 
 	}
@@ -263,6 +288,11 @@ import shopcart from 'components/shopcart/shopcart'
 							text-decoration:line-thorgh
 							font-size:10px
 							color:rgb(147,153,159)	
+					.cartcontrol-wrapper
+						position:absolute
+						right:0
+						bottom:12px
+								
 								
 
 </style>
