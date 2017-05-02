@@ -15,7 +15,7 @@
 				<li v-for="item in goods" class = "food-list food-list-hook">
 					<h1 class="title">{{item.name}}</h1>
 					<ul>
-						<li v-for="food in item.foods" class="food-item border-1px">
+						<li @click="selectFood(food,$event)" v-for="food in item.foods" class="food-item border-1px">
 							<div class="icon">
 								<img :src="food.icon" width="57" height="57">
 							</div>
@@ -49,12 +49,17 @@
 		-->
 		<shopcart :select-foods="selectFoods" :delivery-price='seller.deliveryPrice' :min-price='seller.minPrice'></shopcart>
 	</div>
+
+	<!-- 引用food组件(商品详情页) -->
+	<food :food="selectedFood" v-ref:food></food>
 </template>
 
 <script>
 //引用shopcart(购物车)组件
 import shopcart from 'components/shopcart/shopcart' 
 import cartcontrol from 'components/cartcontrol/cartcontrol' 
+import food from 'components/food/food'
+
 	const ERR_OK = 0;
 	export default{
 		// 外层组件传递给goods组件
@@ -68,7 +73,8 @@ import cartcontrol from 'components/cartcontrol/cartcontrol'
 			return{
 				goods:[],
 				listHeight:[],
-				scrollY:0
+				scrollY:0,
+				selectedFood:{}
 
 			}
 		},//data end
@@ -123,7 +129,7 @@ import cartcontrol from 'components/cartcontrol/cartcontrol'
 			},//currentIndex
 
 			//被选中的food
-			selectFoods (){
+			selectFoods(){
 				let foods = [];
 				this.goods.forEach((good)=>{
 					good.foods.forEach((food)=>{
@@ -153,6 +159,12 @@ import cartcontrol from 'components/cartcontrol/cartcontrol'
 				}
 			},
 
+			//弹出被点击的商品的详情页
+			selectFood(food,event){
+				this.selectedFood = food
+				this.$refs.food.show()
+			},
+
 			//左右联动绑定
 			//获取被点击DOM的index,然后利用之前listHeight中存储的scrollTop来完成定位
 			selectMenu(ids,event){
@@ -166,10 +178,11 @@ import cartcontrol from 'components/cartcontrol/cartcontrol'
 
 		},//methods end
 
-		//注册购物车组件
+		//注册被引入的组件
 		components:{
 			'shopcart':shopcart,
-			'cartcontrol':cartcontrol
+			'cartcontrol':cartcontrol,
+			'food':food
 		}
 
 	}
