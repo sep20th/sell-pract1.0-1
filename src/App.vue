@@ -12,7 +12,7 @@
         <a v-link="{path:'/seller'}">商家</a> 
       </div>
     </div>
-    <router-view></router-view>
+    <router-view :seller="seller"></router-view>
   </div>
 </template>
 
@@ -33,7 +33,6 @@ export default{
       let data = res.body
       if(data.errno === ERR_OK){
         this.seller = data.data
-          console.log(this.seller)
       }
     })
   },
