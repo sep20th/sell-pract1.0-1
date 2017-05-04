@@ -151,12 +151,8 @@ const NEGATIVE = 1;
         if(min.toString().length<2){
         	min = '0'+min
         }
-
         
-  			let ti =  y + '-'+ m +  '-' + d + ' '+  h + ':' + min;
-
-
-        return ti
+        return  y + '-'+ m +  '-' + d + ' '+  h + ':' + min;
       }
     },
 		
