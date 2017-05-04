@@ -61,7 +61,7 @@
 // import { xx } from .. --对应 export function xx
 import cartcontrol from 'components/cartcontrol/cartcontrol'
 import Vue from 'vue'
-import { formatDate } from 'common/js/date'
+// import { formatDate } from 'common/js/date'
 import split from 'components/split/split'
 import ratingselect from 'components/ratingselect/ratingselect'
 const ALL = 2;
@@ -129,13 +129,36 @@ const NEGATIVE = 1;
 			}
 		},
 
-		// //定义过滤器filters
-		//  filters: {
-  //     formatDate(time) {
-  //       let date = new Date(time);
-  //       return formatDate(date, 'yyyy-MM-dd hh:mm');
-  //     }
-  //   },
+		//定义过滤器filters
+		 filters: {
+      formatDate(time) {
+        let date = new Date(time);
+        let y = date.getFullYear();
+        let m = date.getMonth() + 1;
+        let d = date.getDate();
+        let h = date.getHours();
+        let min = date.getMinutes();
+
+        if( m.toString().length<2){
+        	m = "0"+ m
+        }
+        if(d.toString().length<2){
+        	d = '0'+d
+        }
+        if(h.toString().length<2){
+        	h = '0'+h
+        }
+        if(min.toString().length<2){
+        	min = '0'+min
+        }
+
+        
+  			let ti =  y + '-'+ m +  '-' + d + ' '+  h + ':' + min;
+
+
+        return ti
+      }
+    },
 		
 
 		components:{

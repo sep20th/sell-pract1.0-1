@@ -54,7 +54,7 @@
       "type": -1,
       "foods": [
         {
-          "name": "皮蛋瘦肉粥",
+          "name": "皮蛋瘦肉",
           "price": 10,
           "oldPrice": "",
           "description": "咸粥",
@@ -71,14 +71,14 @@
             },
             {
               "username": "2******3",
-              "rateTime": 1469271264000,
+              "rateTime": 1467478964000,
               "rateType": 0,
               "text": "",
               "avatar": "http://static.galileo.xiaojukeji.com/static/tms/default_header.png"
             },
             {
               "username": "3******b",
-              "rateTime": 1469261964000,
+              "rateTime": 1467478964000,
               "rateType": 1,
               "text": "",
               "avatar": "http://static.galileo.xiaojukeji.com/static/tms/default_header.png"
