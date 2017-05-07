@@ -148,7 +148,6 @@ const ERR_OK = 0;
 		bottom:0
 		left 0
 		width:100%
-		overflow hidden
 		overflow-y: scroll
 		-webkit-overflow-scrolling: touch
 		&::-webkit-scrollbar
