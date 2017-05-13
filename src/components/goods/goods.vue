@@ -55,7 +55,7 @@
 </template>
 
 <script>
-//引用shopcart(购物车)组件
+//引用shopcart(购物车),增加减少,food详情页 组件
 import shopcart from 'components/shopcart/shopcart' 
 import cartcontrol from 'components/cartcontrol/cartcontrol' 
 import food from 'components/food/food'
